@@ -1,0 +1,29 @@
+{
+  "name": "salticidae",
+  "version": "0.1.0",
+  "description": "A utility library to make downloading & extracting specific content from a URL easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kadamwhite/salticidae.git"
+  },
+  "keywords": [
+    "spider",
+    "webspider",
+    "crawler",
+    "cheerio"
+  ],
+  "author": "K Adam White",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kadamwhite/salticidae/issues"
+  },
+  "homepage": "https://github.com/kadamwhite/salticidae#readme",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "cheerio": "^0.22.0"
+  }
+}
