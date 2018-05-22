@@ -4,15 +4,19 @@
 
 This is a utility for use in spidering specific content from a webpage. It is named after the jumping spider family because spiders are terrifying, doubly so if they can attack at range.
 
-Usage:
+## Usage
 
 ```js
-const spider = require('salticidae').spider;
+const { spider } = require( 'salticidae' );
 
-spider('http://some.url/', {
-    key: $ => $('.some-selector').find('.to #return').text()
-}).then(results => {
-    console.log(results);
-    // { key: 'Whatever the text of that node was' }
+spider( 'http://some.url/', {
+	key: $ => $( '.some-selector' ).find( '.to #return' ).text(),
+	otherKey: $ => $( '.another-selector' ).html(),
+}).then( results => {
+	console.log(results);
+	// {
+	//     key: 'Whatever the text of that node was',
+	//     otherKey: '<p>The innerHTML of that other node</p>',
+	// }
 });
 ```
