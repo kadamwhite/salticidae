@@ -1,10 +1,11 @@
 {
   "name": "salticidae",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A utility library to make downloading & extracting specific content from a URL easy",
   "main": "index.js",
   "scripts": {
-    "test": "_mocha test.js"
+    "lint": "eslint . --fix",
+    "test": "jest test.js"
   },
   "repository": {
     "type": "git",
@@ -21,14 +22,23 @@
   "bugs": {
     "url": "https://github.com/kadamwhite/salticidae/issues"
   },
-  "homepage": "https://github.com/kadamwhite/salticidae#readme",
+	"homepage": "https://github.com/kadamwhite/salticidae#readme",
+	"jest": {
+		"testEnvironment": "node"
+	},
   "dependencies": {
-    "axios": "^0.15.3",
-    "cheerio": "^0.22.0"
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "mocha": "^3.2.0"
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-humanmade": "^0.5.0",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.47.1",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
+    "jest": "^22.4.4"
   }
 }

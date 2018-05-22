@@ -1,9 +1,5 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
-
-const get = (url) => axios.get(url).then((results) => results.data);
-
-const extract = (html, selectorMethod) => selectorMethod(cheerio.load(html));
+const axios = require( 'axios' );
+const cheerio = require( 'cheerio' );
 
 /**
  * Load a URL, and return an object with the results of running one or many
@@ -15,16 +11,19 @@ const extract = (html, selectorMethod) => selectorMethod(cheerio.load(html));
  * "$", corresponding to the loaded cheerio instance.
  * @returns {Object} An object of the results of each method
  */
-const spider = (url, selectorMethods) => get(url)
-  .then(html => {
-    const $ = cheerio.load(html);
-    return Object.keys(selectorMethods).reduce((results, key) => {
-      const selectorMethod = selectorMethods[key];
-      results[key] = selectorMethod($);
-      return results;
-    }, {});
-  });
+const spider = ( url, selectorMethods ) => axios
+	.get( url )
+	.then( results => results.data )
+	.then( html => {
+		const $ = cheerio.load( html );
+
+		return Object.keys( selectorMethods ).reduce( ( results, key ) => {
+			const selectorMethod = selectorMethods[ key ];
+			results[ key ] = selectorMethod( $ );
+			return results;
+		}, {} );
+	} );
 
 module.exports = {
-  spider
+	spider,
 };
