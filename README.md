@@ -8,7 +8,7 @@ This is a set of utilities to simplify common local scripting tasks. As the libr
 
 ## Modules
 
-### `spider()`
+### `spider`
 
 **Please Note:** The `spider` module has a peer dependency on [axios](https://github.com/axios/axios).
 
