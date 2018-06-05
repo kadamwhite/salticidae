@@ -22,15 +22,18 @@
   "bugs": {
     "url": "https://github.com/kadamwhite/salticidae/issues"
   },
-	"homepage": "https://github.com/kadamwhite/salticidae#readme",
-	"jest": {
-		"testEnvironment": "node"
-	},
+  "homepage": "https://github.com/kadamwhite/salticidae#readme",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
-    "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2"
   },
+  "peerDependencies": {
+    "axios": "*"
+  },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.19.1",
     "eslint-config-humanmade": "^0.5.0",
