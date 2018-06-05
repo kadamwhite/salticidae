@@ -1,9 +1,9 @@
+const { join } = require( 'path' );
 const {
 	ls,
 	read,
 	readJSON,
 } = require( './index' );
-const { join } = require( 'path' );
 
 describe( 'salticidae.spider', () => {
 

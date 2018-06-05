@@ -1,7 +1,7 @@
 const fs = require( 'fs' );
 const pify = require( 'pify' );
 const { resolve } = require( 'path' );
-const { debug, error } = require( '../log' );
+const { debug } = require( '../log' );
 
 /**
  * List the files in a directory, either as a list of file and subdir names or
@@ -10,7 +10,7 @@ const { debug, error } = require( '../log' );
  * @param {String}  inputDir        The file system path to the directory to read.
  * @param {Object}  [opts]          Options hash.
  * @param {Boolean} [opts.absolute] Whether to return absolute file system paths.
- * @returns Promise A promise to an array of file system path strings.
+ * @returns {Promise} A promise to an array of file system path strings.
  */
 const ls = async ( inputDir, opts = {} ) => {
 	debug( `salticidae.fs.ls: listing files in ${ inputDir }` );
@@ -40,13 +40,6 @@ const readJSON = filePath => read( filePath ).then( contents => {
 	debug( `salticidae.fs.readJSON: parsing ${ filePath } as JSON` );
 	return JSON.parse( contents );
 } );
-
-const throwOrResolve = ( resolve, reject, err, result ) => {
-	if ( err ) {
-		return reject( err );
-	}
-	resolve( result );
-};
 
 /**
  * Write string content to a file on disk.

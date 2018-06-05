@@ -15,7 +15,8 @@ This is a set of utilities to simplify common local scripting tasks. As the libr
 Run `npm install --save axios` to add this dependency to your project before you utilize this module.
 
 ```js
-const { spider } = require( 'salticidae' );
+const spider = require( 'salticidae/spider' );
+// Alternately: `const { spider } = require( 'salticidae' );`
 
 spider( 'http://some.url/', {
 	key: $ => $( '.some-selector' ).find( '.to #return' ).text(),
