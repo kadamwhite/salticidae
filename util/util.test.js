@@ -38,8 +38,23 @@ describe( 'salticidae.util', () => {
 			expect.assertions( 1 );
 			const delay = wait( 20 );
 			const result = delay( 'Some Value' );
+
 			jest.advanceTimersByTime( 100 );
+
 			return result.then( value => {
+				expect( value ).toEqual( 'Some Value' );
+			} );
+		} );
+
+		it( 'can be used fluidly in a Promise chain', () => {
+			expect.assertions( 1 );
+			const chain = Promise.resolve( 'Some Value' )
+				.then( wait( 20 ) )
+				.then( wait( 20 ) );
+
+			jest.advanceTimersByTime( 100 );
+
+			return chain.then( value => {
 				expect( value ).toEqual( 'Some Value' );
 			} );
 		} );
