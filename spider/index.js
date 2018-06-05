@@ -1,7 +1,7 @@
 const axios = require( 'axios' );
 const cheerio = require( 'cheerio' );
 
-const { debug, error } = require( './log' );
+const { debug, error } = require( '../log' );
 
 /**
  * Load a URL, and return an object with the results of running one or many

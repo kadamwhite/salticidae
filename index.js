@@ -1,5 +1,5 @@
-const spider = require( './lib/spider' );
-
 module.exports = {
-	spider,
+	fs: require( './fs' ),
+	log: require( './log' ),
+	spider: require( './spider' ),
 };

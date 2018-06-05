@@ -1,4 +1,4 @@
-const spider = require( './spider' );
+const spider = require( './index' );
 
 describe( 'salticidae.spider', () => {
 	it( 'returns a Promise for an object of the specified selector results', async () => {
