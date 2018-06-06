@@ -1,4 +1,5 @@
 const {
+	chunk,
 	pad,
 	wait,
 } = require( './index' );
@@ -20,6 +21,28 @@ describe( 'salticidae.util', () => {
 		it( 'has no effect on a sufficiently long number', () => {
 			expect( pad( '007', 3 ) ).toEqual( '007' );
 			expect( pad( '0007', 3 ) ).toEqual( '0007' );
+		} );
+
+	} );
+
+	describe( 'chunk', () => {
+
+		it( 'is a Function', () => {
+			expect( chunk ).toBeInstanceOf( Function );
+		} );
+
+		it( 'breaks a large array into smaller pieces', () => {
+			const result = chunk( [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ], 3 );
+			expect( result ).toEqual( [
+				[ 1, 2, 3 ],
+				[ 4, 5, 6 ],
+				[ 7, 8, 9 ],
+				[ 10, 11 ],
+			] );
+		} );
+
+		it( 'does nothing to an empty array', () => {
+			expect( chunk( [], 1 ) ).toEqual( [] );
 		} );
 
 	} );
@@ -46,18 +69,6 @@ describe( 'salticidae.util', () => {
 			} );
 		} );
 
-		it( 'can be used fluidly in a Promise chain', () => {
-			expect.assertions( 1 );
-			const chain = Promise.resolve( 'Some Value' )
-				.then( wait( 20 ) )
-				.then( wait( 20 ) );
-
-			jest.advanceTimersByTime( 100 );
-
-			return chain.then( value => {
-				expect( value ).toEqual( 'Some Value' );
-			} );
-		} );
 	} );
 
 } );
