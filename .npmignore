@@ -1,2 +1,6 @@
 .eslintrc
 .editorconfig
+
+*.test.js
+fixtures
+fs/fixtures
