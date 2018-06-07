@@ -1,7 +1,7 @@
 const { join } = require( 'path' );
 const {
 	ls,
-	read,
+	readFile,
 	readJSON,
 } = require( './index' );
 
@@ -25,11 +25,11 @@ describe( 'salticidae.spider', () => {
 
 	} );
 
-	describe( '.read()', () => {
+	describe( '.readFile()', () => {
 
 		it( 'Reads a file from disk', async () => {
 			expect.assertions( 1 );
-			const text = await read( join( __dirname, 'fixtures/pangram.txt' ) );
+			const text = await readFile( join( __dirname, 'fixtures/pangram.txt' ) );
 			expect( text.trim() ).toEqual( 'The quick brown fox jumps over the lazy dog.' );
 		} );
 
