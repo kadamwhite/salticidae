@@ -104,8 +104,10 @@ const download = async ( filePath, uri ) => {
 	// Download the file to disk, contextually selecting HTTP or HTTPS.
 	return new Promise( ( resolve, reject ) => {
 		( uri.match( /^https/ ) ? https : http )
-			.get( uri, response => response.pipe( writeToDisk ) )
-			.on( 'finish', resolve )
+			.get( uri, response => response.pipe( writeToDisk )
+				.on( 'finish', resolve )
+				.on( 'error', reject )
+			)
 			.on( 'error', reject );
 	} );
 };
