@@ -1,4 +1,4 @@
-const { debug, log } = require( '../log' );
+const { debug } = require( '../log' );
 const child_process = require( 'child_process' );
 
 /**
