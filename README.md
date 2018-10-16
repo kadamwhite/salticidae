@@ -6,6 +6,8 @@
 
 This is a set of utilities to simplify common local scripting tasks. As the library originated as a utility for spidering specific content from a webpage, it is named after the jumping spider family — because spiders are terrifying, doubly so if they can attack at range.
 
+[![Build Status](https://travis-ci.org/kadamwhite/salticidae.svg?branch=master)](https://travis-ci.org/kadamwhite/salticidae)
+
 ## Modules
 
 ### `spider`
