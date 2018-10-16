@@ -1,6 +1,6 @@
 const axios = require( 'axios' );
-const cheerio = require( 'cheerio' );
 
+const parse = require( '../parse' );
 const { debug, error } = require( '../log' );
 
 /**
@@ -19,12 +19,7 @@ const spider = async ( url, selectorMethods ) => {
 	try {
 		const html = await axios.get( url ).then( results => results.data );
 
-		const $ = cheerio.load( html );
-
-		return Object.keys( selectorMethods ).reduce( ( results, key ) => ( {
-			...results,
-			[ key ]: selectorMethods[ key ]( $ ),
-		} ), {} );
+		return parse( html, selectorMethods );
 	} catch ( err ) {
 		error( `salticidae.spider: error downloading ${ url }!` );
 		throw err;
