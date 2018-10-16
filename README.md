@@ -10,6 +10,8 @@ This is a set of utilities to simplify common local scripting tasks. As the libr
 
 ### `spider`
 
+Given a URL, download the URL's HTML and return an object of data extracted from the page content using a series of [Cheerio](https://github.com/cheeriojs/cheerio) selectors.
+
 **Please Note:** The `spider` module has a peer dependency on [axios](https://github.com/axios/axios).
 
 Run `npm install --save axios` to add this dependency to your project before you utilize this module.
@@ -28,4 +30,19 @@ spider( 'http://some.url/', {
 	//     otherKey: '<p>The innerHTML of that other node</p>',
 	// }
 });
+```
+
+### `parse`
+
+Works just like `spider`, but accepts HTML as string content instead of a remote URL.
+
+```js
+const parse = require( 'salticidae/parse' );
+
+parse( '<p>Some sort of text<sup>*</sup>, <em>etcetera</em>.</p>', {
+	emphasizedText: $ => $( 'em' ).text(),
+} );
+// {
+//     emphasizedText: 'etcetera',
+// }
 ```
