@@ -1,5 +1,6 @@
 const { join } = require( 'path' );
 const {
+	ensureFileExists,
 	ls,
 	readFile,
 	readJSON,
@@ -43,6 +44,25 @@ describe( 'salticidae.spider', () => {
 			expect( text ).toEqual( {
 				words: [ 'the', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog' ],
 			} );
+		} );
+
+	} );
+
+	describe( '.ensureFileExists()', () => {
+
+		it( 'resolves for files which exist', async () => {
+			expect.assertions( 1 );
+			const results = await ensureFileExists( join( __dirname, 'fixtures/pangram.txt' ) );
+			expect( results ).toBeUndefined();
+		} );
+
+		it( 'rejects for files which do not exist', async () => {
+			expect.assertions( 1 );
+			try {
+				await ensureFileExists( join( __dirname, 'fixtures/anagram.txt' ) );
+			} catch ( e ) {
+				expect( e ).toBeDefined();
+			}
 		} );
 
 	} );
