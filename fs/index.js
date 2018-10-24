@@ -48,14 +48,10 @@ const ensureExists = path => new Promise( ( resolve, reject ) => {
  * @param {String} path An absolute file system path
  * @return Promise
  */
-const ensureFileExists = filePath => new Promise( ( resolve, reject ) => {
-	debug( `Ensuring file "${ filePath }" exists` );
+const fileExists = filePath => new Promise( ( resolve, reject ) => {
+	debug( `Checking whether file "${ filePath }" exists` );
 	fs.stat( filePath, err => {
-		if ( err ) {
-			reject( err );
-		} else {
-			resolve();
-		}
+		resolve( ! err );
 	} );
 } );
 
@@ -132,7 +128,7 @@ const download = async ( filePath, uri ) => {
 module.exports = {
 	download,
 	ensureExists,
-	ensureFileExists,
+	fileExists,
 	ls,
 	readFile,
 	readJSON,
