@@ -5,7 +5,7 @@
  * @param {Number}        length The minimum length of the desired string.
  * @returns {String} A zero-padded numeric string.
  */
-const pad = ( val, length ) => {
+const pad = ( val, length = 3 ) => {
 	if ( `${ val }`.length < length ) {
 		return pad( `0${ val }`, length );
 	}

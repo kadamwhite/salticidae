@@ -24,18 +24,19 @@ const runInSequence = ( fns, progressBar = null ) => fns.reduce( async ( lastSte
 /**
  * Given an array of functions creating Promises, execute them in parallel
  * batches of a specific size and return a Promise that resolves when all
- * batches have fun.
+ * batches have run.
  *
- * @param {Function[]} fns Array of functions returning promises.
- * @param {Number} batchSize Number of functions to permit to run simultaneously.
+ * @param {Function[]}  fns           Array of functions returning promises.
+ * @param {Number}      batchSize     Number of functions to permit to run simultaneously.
+ * @param {ProgressBar} [progressBar] Optional ProgressBar instance (see `progress` library).
+ * @returns {Promise} Promise that resolves when the functions have all completed.
  */
-const runInBatches = ( fns, batchSize, progressBar ) => runInSequence(
+const runInBatches = ( fns, batchSize = 3, progressBar = null ) => runInSequence(
 	chunk( fns, batchSize ).map( batch => () => Promise.all( batch.map( fn => fn() ) ) ),
 	progressBar
 );
 
 module.exports = {
-	chunk,
 	runInSequence,
 	runInBatches,
 };
