@@ -31,4 +31,19 @@ describe( 'salticidae.spider', () => {
 			p: 'Some sort of text*, etcetera.',
 		} );
 	} );
+
+	it( 'accepts a callback function in addition to an object', () => {
+		const content = fs.readFileSync( path.join( __dirname, 'fixtures', 'sample.html' ) );
+		const results = parse( content, $ => ( {
+			author: $( '.repohead .author' ).text(),
+			commitCount: $( '.numbers-summary .commits' ).text().trim(),
+			readmeStrongText: $( '#readme strong' ).text().trim(),
+		} ) );
+
+		expect( results ).toEqual( {
+			author: 'kadamwhite',
+			commitCount: '23 commits',
+			readmeStrongText: 'Requires Node v8.2.1 or greater.',
+		} );
+	} );
 } );
