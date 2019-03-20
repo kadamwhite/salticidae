@@ -41,10 +41,154 @@ Works just like `spider`, but accepts HTML as string content instead of a remote
 ```js
 const parse = require( 'salticidae/parse' );
 
-parse( '<p>Some sort of text<sup>*</sup>, <em>etcetera</em>.</p>', {
+parse( `
+<p>Some sort of text<sup>*</sup>, <em>etcetera</em>.</p>
+<p><em>Declarative</em> final statement!</p>
+`, {
 	emphasizedText: $ => $( 'em' ).text(),
+	lastParagraph: $ => $( 'p' ).last().html(),
 } );
 // {
-//     emphasizedText: 'etcetera',
+//   emphasizedText: 'etcetera',
+//   lastParagraph:  '<em>Declarative</em> final statement!',
 // }
 ```
+
+### `cp`
+
+```js
+exec( commandString ).then( () => 'done' );
+```
+
+Execute an arbitrary shell command string as a child process.
+
+```js
+spawn( command, argsArray ).then( () => 'done' );
+```
+Spawn a shell command as a child process and pass in provided arguments. The spawned process inherits the active `stdio` streams.
+
+
+### `fs`
+
+```js
+download( absFilePath, uri ).then( () => 'done' );
+```
+
+Download the contents of `uri` and save them as `absFilePath`.
+
+```js
+ensureExists( absFolderPath ).then( () => 'exists' );
+```
+
+Ensure a folder path exists on disk using `mkdirp`.
+
+```js
+fileExists( absFilePath ).then( exists => {} );
+```
+
+Check whether a given file exists on disk.
+
+```js
+ls( absFolderPath, [options] ).then( files => {} );
+```
+
+Enumerate the files within the specified directory. If `{ absolute: true }` is passed in the options object, the promise will resolve to absolute file system paths.
+
+```js
+readFile( absFilePath ).then( fileContents => {} );
+```
+
+Read a file on disk and return its contents as a string.
+
+```js
+readJSON( absFilePath ).then( data => {} );
+```
+
+Read a file on disk and parse its contents as JSON. (Note that it is usually preferable to use `require` to read JSON files.)
+
+```js
+writeFile( absFilePath, contents ).then( () => 'done' );
+```
+
+Write string content to a file on disk.
+
+```js
+writeJSON( absFilePath, data ).then( () => 'done' );
+```
+
+Serialize a JS object to a file on disk as stringified JSON.
+
+### `sequence`
+
+```js
+runInSequence( fns, [progressBar] ).then( () => 'done' );
+```
+
+Given an array of functions creating Promises, execute those functions one at a time and return a Promise that resolves when all functions have run. If a `progress` ProgressBar instance is provided as a second argument, `.tick()` will be called on that bar each time a function completes.
+
+```js
+runInBatches( fns, batchSize, [progressBar] ).then( () => 'done' );
+```
+
+Given an array of functions creating Promises, execute them in parallel batches of a specific size and return a Promise that resolves when all batches have run.
+
+### `util`
+
+```js
+pad( 42, 4 ); // 0042
+```
+
+Pad a numeric string with leading zeroes until the string is a certain length.
+
+```js
+const arr = [ 1, 2, 3, 4, 5, 6, 7, 8 ];
+chunk( array, 4 );
+// [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 7, 8 ] ]
+```
+
+Break an array into smaller arrays of a specific maximum length.
+
+```js
+Promise.resolve( input )
+	.then( wait( 200 ) )
+	.then( output => {
+		// Approximately 200ms have passed.
+		input === output
+	} );
+```
+
+Return a function that waits for approximately the provided number of milliseconds (+/- 20%), then returns a promise resolving to the function's input.
+
+
+### `log`
+
+
+```js
+verbose();
+```
+
+Set log level to Verbose. `debug()` messages will be displayed.
+
+```js
+quiet();
+```
+
+Set log level to Quiet. `debug()` messages will not be displayed.
+
+```js
+log( 'message' );
+```
+
+Output a message.
+
+```js
+debug( 'message' );
+```
+
+Output a message if the log level has been set to Verbose.
+
+```js
+error( 'error message' );
+```
+
+Output an error message.
