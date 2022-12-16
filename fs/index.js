@@ -1,7 +1,7 @@
 const fs = require( 'fs' );
 const http = require( 'http' );
 const https = require( 'https' );
-const pify = require( 'pify' );
+const { promisify } = require( 'util' );
 const mkdirp = require( 'mkdirp' );
 const { resolve, dirname } = require( 'path' );
 
@@ -16,7 +16,7 @@ const { resolve, dirname } = require( 'path' );
  */
 const ls = async ( inputDir, opts = {} ) => {
 	const absolute = opts.absolute || false;
-	const fileList = await pify( fs.readdir )( inputDir );
+	const fileList = await promisify( fs.readdir )( inputDir );
 	if ( absolute ) {
 		return fileList.map( fileName => resolve( inputDir, fileName ) );
 	}
@@ -57,7 +57,7 @@ const fileExists = filePath => new Promise( ( resolve, reject ) => {
  * @param {String} filePath Absolute file system path for the file to read.
  */
 const readFile = filePath => {
-	return pify( fs.readFile )( filePath ).then( contents => contents.toString() );
+	return promisify( fs.readFile )( filePath ).then( contents => contents.toString() );
 };
 
 /**
@@ -75,7 +75,7 @@ const readJSON = filePath => readFile( filePath ).then( contents => {
  * @param {String} contents Content to write to the file.
  */
 const writeFile = ( filePath, contents ) => {
-	return pify( fs.writeFile )( filePath, contents );
+	return promisify( fs.writeFile )( filePath, contents );
 };
 
 /**
