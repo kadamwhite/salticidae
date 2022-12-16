@@ -1,15 +1,24 @@
-# top-most EditorConfig file
+# Editorconfig defaults
+
 root = true
 
-
 [*]
-# Unix-style newlines with a newline ending every file
+charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
-
-# Set default charset
-charset = utf-8
-
-# Set default indent to 2 spaces
 indent_style = tab
+
+[*.json]
+indent_style = tab
+
+[package.json]
+indent_style = space
+indent_size = 2
+
+[*.yml]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

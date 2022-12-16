@@ -128,15 +128,15 @@ const download = async ( filePath, uri ) => {
  * @returns {number} Megabyte size of provided path.
  */
 const getSizeInMb = ( path ) => {
-    try {
-        const { size } = fs.statSync( path );
-        if ( size ) {
-            return Math.round( size / ( 1024 * 1024 ) );
-        }
-    } catch ( e ) {
-        console.error( e );
-        return 0;
-    }
+	try {
+		const { size } = fs.statSync( path );
+		if ( size ) {
+			return Math.round( size / ( 1024 * 1024 ) );
+		}
+	} catch ( e ) {
+		console.error( e );
+		return 0;
+	}
 };
 
 module.exports = {
