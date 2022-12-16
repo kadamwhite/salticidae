@@ -72,3 +72,6 @@ sftp-config.json
 
 # JIRA plugin
 atlassian-ide-plugin.xml
+
+# lockfile
+package-lock.json
