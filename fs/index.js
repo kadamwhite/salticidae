@@ -1,10 +1,12 @@
 const fs = require( 'fs' );
 const http = require( 'http' );
 const https = require( 'https' );
+const FileType = require( 'file-type' );
 const { resolve, dirname } = require( 'path' );
 const { promisify } = require( 'util' );
-
 const mkdirp = require( 'mkdirp' );
+
+const { spawn } = require( '../cp' );
 
 /**
  * List the files in a directory, either as a list of file and subdir names or
@@ -139,6 +141,27 @@ const getSizeInMb = ( path ) => {
 	}
 };
 
+/**
+ * Correct the file type of a file, if needed. Useful for when a jpg is wrongly
+ * saved as .png, for example.
+ *
+ * @param {string} filePath Path to a file on disk.
+ * @returns {Promise} Promise resolving when file extension has been validated or corrected.
+ */
+const correctFileType = async ( filePath ) => {
+	try {
+		const { ext } = await FileType.fromFile( filePath );
+		const currentExt = extname( filePath );
+		const targetExt = `.${ ext }`;
+		if ( currentExt !== targetExt ) {
+			const newPath = filePath.replace( new RegExp( `${ currentExt }$` ), targetExt );
+			await spawn( 'mv', [ filePath, newPath ] );
+		}
+	} catch (e) {
+		// Should we log this?
+	}
+  }
+
 module.exports = {
 	download,
 	ensureExists,
@@ -149,4 +172,5 @@ module.exports = {
 	readJSON,
 	writeFile,
 	writeJSON,
+	correctFileType,
 };
