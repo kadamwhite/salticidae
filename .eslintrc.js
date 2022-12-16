@@ -4,7 +4,6 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:import/errors',
 		'plugin:jsdoc/recommended',
-		'plugin:react-hooks/recommended',
 	],
 	'env': {
 		'browser': true,
@@ -21,18 +20,11 @@ module.exports = {
 		'sourceType': 'module',
 	},
 	'plugins': [
-		'react',
 		'jsx-a11y',
 		'flowtype',
 		'import',
 		'jsdoc',
-		'react-hooks',
 	],
-	'settings': {
-		'react': {
-			'version': 'detect',
-		},
-	},
 	'ignorePatterns': [
 		'node_modules/',
 		'src/vendor/',
@@ -58,7 +50,6 @@ module.exports = {
 		// } ],
 		// 'jsdoc/require-jsdoc': 'warn',
 		// 'jsdoc/no-undefined-types': 'off',
-		// 'react/jsx-sort-props': 'off',
 
 		// These rules were computed from the HM standards, inclusive of the
 		// overrides above, and rendered out using `eslint --print-config`.
@@ -189,25 +180,12 @@ module.exports = {
 			},
 		} ],
 		'yoda': [ 'error', 'never' ],
-		'react/jsx-curly-spacing': [ 'error', {
-			'when': 'always',
-			'children': true,
-		} ],
-		'react/jsx-wrap-multilines': 'error',
-		'react/jsx-curly-newline': [ 'warn', {
-			'multiline': 'consistent',
-			'singleline': 'consistent',
-		} ],
-		'react/jsx-boolean-value': [ 'error', 'never' ],
-		'react/jsx-sort-props': 'off',
 		'jsx-a11y/anchor-is-valid': [ 'error', {
 			'aspects': [
 				'noHref',
 				'invalidHref',
 			],
 		} ],
-		'react-hooks/rules-of-hooks': 'error',
-		'react-hooks/exhaustive-deps': 'warn',
 		'jsdoc/valid-types': 'off',
 		'array-callback-return': 'warn',
 		'default-case': [ 'warn', {
@@ -386,28 +364,6 @@ module.exports = {
 		'import/first': 'error',
 		'import/no-amd': 'error',
 		'import/no-webpack-loader-syntax': 'error',
-		'react/forbid-foreign-prop-types': [ 'warn', {
-			'allowInPropTypes': true,
-		} ],
-		'react/jsx-no-comment-textnodes': 'warn',
-		'react/jsx-no-duplicate-props': [ 'warn', {
-			'ignoreCase': true,
-		} ],
-		'react/jsx-no-target-blank': 'warn',
-		'react/jsx-no-undef': 'error',
-		'react/jsx-pascal-case': [ 'warn', {
-			'allowAllCaps': true,
-			'ignore': [],
-		} ],
-		'react/jsx-uses-react': 'warn',
-		'react/jsx-uses-vars': 'warn',
-		'react/no-danger-with-children': 'warn',
-		'react/no-direct-mutation-state': 'warn',
-		'react/no-is-mounted': 'warn',
-		'react/no-typos': 'error',
-		'react/react-in-jsx-scope': 'error',
-		'react/require-render-return': 'error',
-		'react/style-prop-object': 'warn',
 		'jsx-a11y/accessible-emoji': 'warn',
 		'jsx-a11y/alt-text': 'warn',
 		'jsx-a11y/anchor-has-content': 'warn',
