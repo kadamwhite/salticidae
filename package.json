@@ -28,21 +28,22 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.6"
   },
   "peerDependencies": {
     "axios": "*"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.19.1",
-    "eslint-config-humanmade": "^0.5.0",
-    "eslint-config-react-app": "^2.1.0",
-    "eslint-plugin-flowtype": "^2.47.1",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.8.2",
-    "jest": "^24.5.0"
+    "axios": "^1.2.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsdoc": "^29.2.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "eslint-plugin-sort-destructure-keys": "^1.4.0",
+    "jest": "^28.1.0"
   }
 }
