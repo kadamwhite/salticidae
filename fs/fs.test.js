@@ -1,3 +1,4 @@
+/* global __dirname:false */
 const { join } = require( 'path' );
 
 const {

@@ -13,6 +13,7 @@ const parse = require( '../parse' );
  * @returns {object} An object of the results of each method.
  */
 const spider = async ( url, selectorMethods ) => {
+	/* eslint-disable no-useless-catch */
 	try {
 		const html = await axios.get( url ).then( ( results ) => results.data );
 
