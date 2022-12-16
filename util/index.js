@@ -1,9 +1,9 @@
 /**
  * Pad a numeric string with leading zeroes until the string is a certain length.
  *
- * @param {Number|String} val    A number or numeric string.
- * @param {Number}        length The minimum length of the desired string.
- * @returns {String} A zero-padded numeric string.
+ * @param {number | string} val    A number or numeric string.
+ * @param {number}        length The minimum length of the desired string.
+ * @returns {string} A zero-padded numeric string.
  */
 const pad = ( val, length = 3 ) => {
 	if ( `${ val }`.length < length ) {
@@ -16,7 +16,7 @@ const pad = ( val, length = 3 ) => {
  * Break an array into smaller pieces of a specific size.
  *
  * @param {Array}  arr       Array to break into smaller pieces.
- * @param {Number} chunkSize The number of items per chunk.
+ * @param {number} chunkSize The number of items per chunk.
  * @returns {Array} Array of arrays of the specific size.
  */
 const chunk = ( arr, chunkSize ) => arr.reduce( ( chunks, item ) => {
@@ -40,10 +40,10 @@ const chunk = ( arr, chunkSize ) => arr.reduce( ( chunks, item ) => {
  * Return a function that waits a slightly-randomized number of milliseconds,
  * then returns a promise resolving to the function's input argument.
  *
- * @param {Number} delay The approximate number of milliseconds to wait.
+ * @param {number} delay The approximate number of milliseconds to wait.
  * @returns {Function} A function
  */
-const wait = delay => results => new Promise( ( resolve, reject ) => {
+const wait = ( delay ) => ( results ) => new Promise( ( resolve, reject ) => {
 	// Introduce +/- 20% random variation
 	const randomDelay = delay * 0.8 + ( Math.random() * ( delay * 0.4 ) );
 	setTimeout( () => resolve( results ), randomDelay );

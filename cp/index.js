@@ -3,12 +3,12 @@ const child_process = require( 'child_process' );
 /**
  * Execute an arbitrary string command.
  *
- * @param {String} command A bash command string, including arguments.
+ * @param {string} command A bash command string, including arguments.
  * @returns {Promise} A promise which will resolve when the executed command exits.
  */
-const exec = command => {
+const exec = ( command ) => {
 	return new Promise( ( resolve, reject ) => {
-		child_process.exec( command, error => {
+		child_process.exec( command, ( error ) => {
 			if ( error ) {
 				return reject( error );
 			}
@@ -20,8 +20,8 @@ const exec = command => {
 /**
  * Execute a command as a spawned process.
  *
- * @param {String}   command A bash command string, excluding arguments.
- * @param {String[]} args    An array of argument strings for the provided command.
+ * @param {string}   command A bash command string, excluding arguments.
+ * @param {string[]} args    An array of argument strings for the provided command.
  * @returns {Promise<string[]>} Array of file and directory names
  */
 const spawn = ( command, args ) => {
@@ -31,7 +31,7 @@ const spawn = ( command, args ) => {
 			stdio: 'inherit',
 		} );
 
-		spawnedProcess.on( 'error', err => reject( err ) );
+		spawnedProcess.on( 'error', ( err ) => reject( err ) );
 
 		spawnedProcess.on( 'close', ( code, signal ) => {
 			if ( code ) {
@@ -41,7 +41,7 @@ const spawn = ( command, args ) => {
 			resolve();
 		} );
 	} );
-}
+};
 
 module.exports = {
 	exec,

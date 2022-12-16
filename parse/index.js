@@ -1,5 +1,9 @@
 const cheerio = require( 'cheerio' );
 
+/**
+ * @param html
+ * @param selectorMethods
+ */
 const parse = ( html, selectorMethods ) => {
 	const $ = cheerio.load( html );
 	if ( typeof selectorMethods === 'function' ) {

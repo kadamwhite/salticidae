@@ -33,7 +33,11 @@ describe( 'salticidae.sequence', () => {
 
 		it( 'runs provided async functions in sequence', () => {
 			const output = [];
-			const resolveAfterDelay = ( returnVal, delay ) => new Promise( resolve => {
+			/**
+			 * @param returnVal
+			 * @param delay
+			 */
+			const resolveAfterDelay = ( returnVal, delay ) => new Promise( ( resolve ) => {
 				setTimeout( () => {
 					output.push( returnVal );
 					resolve( returnVal );
@@ -68,7 +72,11 @@ describe( 'salticidae.sequence', () => {
 
 		it( 'runs provided async functions in sequence', () => {
 			const output = [];
-			const resolveAfterDelay = ( returnVal, delay ) => new Promise( resolve => {
+			/**
+			 * @param returnVal
+			 * @param delay
+			 */
+			const resolveAfterDelay = ( returnVal, delay ) => new Promise( ( resolve ) => {
 				setTimeout( () => {
 					output.push( returnVal );
 					resolve( returnVal );

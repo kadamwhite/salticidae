@@ -64,7 +64,7 @@ describe( 'salticidae.util', () => {
 
 			jest.advanceTimersByTime( 100 );
 
-			return result.then( value => {
+			return result.then( ( value ) => {
 				expect( value ).toEqual( 'Some Value' );
 			} );
 		} );
