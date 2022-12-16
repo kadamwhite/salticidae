@@ -1,6 +1,6 @@
 {
   "name": "salticidae",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "A utility library to make downloading & extracting specific content from a URL easy",
   "main": "index.js",
   "scripts": {
