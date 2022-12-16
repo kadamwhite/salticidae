@@ -1,4 +1,3 @@
-const { debug } = require( '../log' );
 const { chunk } = require( '../util' );
 
 /**
@@ -10,8 +9,6 @@ const { chunk } = require( '../util' );
  * @returns {Promise} Promise that resolves when the functions have all completed.
  */
 const runInSequence = ( fns, progressBar = null ) => fns.reduce( async ( lastStep, fn, i ) => {
-	debug( `Running function #${ i + 1 } of ${ fns.length }` );
-
 	await lastStep;
 
 	if ( progressBar && typeof progressBar.tick === 'function' ) {

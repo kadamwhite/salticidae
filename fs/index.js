@@ -4,7 +4,6 @@ const https = require( 'https' );
 const pify = require( 'pify' );
 const mkdirp = require( 'mkdirp' );
 const { resolve, dirname } = require( 'path' );
-const { debug } = require( '../log' );
 
 /**
  * List the files in a directory, either as a list of file and subdir names or
@@ -16,7 +15,6 @@ const { debug } = require( '../log' );
  * @returns {Promise} A promise to an array of file system path strings.
  */
 const ls = async ( inputDir, opts = {} ) => {
-	debug( `salticidae.fs.ls: listing files in ${ inputDir }` );
 	const absolute = opts.absolute || false;
 	const fileList = await pify( fs.readdir )( inputDir );
 	if ( absolute ) {
@@ -32,7 +30,6 @@ const ls = async ( inputDir, opts = {} ) => {
  * @return Promise
  */
 const ensureExists = path => new Promise( ( resolve, reject ) => {
-	debug( `Ensuring path "${ path }" exists` );
 	mkdirp( path, err => {
 		if ( err ) {
 			reject( err );
@@ -49,7 +46,6 @@ const ensureExists = path => new Promise( ( resolve, reject ) => {
  * @return Promise
  */
 const fileExists = filePath => new Promise( ( resolve, reject ) => {
-	debug( `Checking whether file "${ filePath }" exists` );
 	fs.stat( filePath, err => {
 		resolve( ! err );
 	} );
@@ -61,7 +57,6 @@ const fileExists = filePath => new Promise( ( resolve, reject ) => {
  * @param {String} filePath Absolute file system path for the file to read.
  */
 const readFile = filePath => {
-	debug( `salticidae.fs.read: reading ${ filePath }` );
 	return pify( fs.readFile )( filePath ).then( contents => contents.toString() );
 };
 
@@ -70,7 +65,6 @@ const readFile = filePath => {
  * @param {String} filePath Absolute file system path for the file to load.
  */
 const readJSON = filePath => readFile( filePath ).then( contents => {
-	debug( `salticidae.fs.readJSON: parsing ${ filePath } as JSON` );
 	return JSON.parse( contents );
 } );
 
@@ -81,7 +75,6 @@ const readJSON = filePath => readFile( filePath ).then( contents => {
  * @param {String} contents Content to write to the file.
  */
 const writeFile = ( filePath, contents ) => {
-	debug( `salticidae.fs.write: writing ${ contents.length } characters to ${ filePath }` );
 	return pify( fs.writeFile )( filePath, contents );
 };
 
@@ -92,7 +85,6 @@ const writeFile = ( filePath, contents ) => {
  * @param {String} contents Object to stringify as JSON and write to the file.
  */
 const writeJSON = ( filePath, contents ) => {
-	debug( `salticidae.fs.writeJSON: writing JSON data to ${ filePath }` );
 	const jsonContents = JSON.stringify( contents );
 	return writeFile( filePath, jsonContents );
 };
@@ -105,8 +97,6 @@ const writeJSON = ( filePath, contents ) => {
  * @return Promise
  */
 const download = async ( filePath, uri ) => {
-	debug( `Downloading ${ uri } to ${ filePath }` );
-
 	const outputDir = dirname( filePath );
 
 	// Don't download to a non-existent directory.

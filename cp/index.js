@@ -1,4 +1,3 @@
-const { debug } = require( '../log' );
 const child_process = require( 'child_process' );
 
 /**
@@ -8,7 +7,6 @@ const child_process = require( 'child_process' );
  * @returns {Promise} A promise which will resolve when the executed command exits.
  */
 const exec = command => {
-	debug( command );
 	return new Promise( ( resolve, reject ) => {
 		child_process.exec( command, error => {
 			if ( error ) {
@@ -24,9 +22,9 @@ const exec = command => {
  *
  * @param {String}   command A bash command string, excluding arguments.
  * @param {String[]} args    An array of argument strings for the provided command.
+ * @returns {Promise<string[]>} Array of file and directory names
  */
 const spawn = ( command, args ) => {
-	debug( `${ command } ${ args.join( ' ' ) }` );
 	return new Promise( ( resolve, reject ) => {
 		const { spawn } = require( 'child_process' );
 		const spawnedProcess = spawn( command, args, {
@@ -36,11 +34,6 @@ const spawn = ( command, args ) => {
 		spawnedProcess.on( 'error', err => reject( err ) );
 
 		spawnedProcess.on( 'close', ( code, signal ) => {
-			debug( `${ command } exited with${
-				code ? ` code ${ code }` : ''
-			}${
-				signal ? ` signal ${ signal }` : ''
-			}` );
 			if ( code ) {
 				reject();
 				return;

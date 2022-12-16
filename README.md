@@ -158,37 +158,3 @@ Promise.resolve( input )
 ```
 
 Return a function that waits for approximately the provided number of milliseconds (+/- 20%), then returns a promise resolving to the function's input.
-
-
-### `log`
-
-
-```js
-verbose();
-```
-
-Set log level to Verbose. `debug()` messages will be displayed.
-
-```js
-quiet();
-```
-
-Set log level to Quiet. `debug()` messages will not be displayed.
-
-```js
-log( 'message' );
-```
-
-Output a message.
-
-```js
-debug( 'message' );
-```
-
-Output a message if the log level has been set to Verbose.
-
-```js
-error( 'error message' );
-```
-
-Output an error message.
