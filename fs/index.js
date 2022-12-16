@@ -121,10 +121,29 @@ const download = async ( filePath, uri ) => {
 	} );
 };
 
+/**
+ * Return the size of a file in MB.
+ *
+ * @param {string} path File system path.
+ * @returns {number} Megabyte size of provided path.
+ */
+const getSizeInMb = ( path ) => {
+    try {
+        const { size } = fs.statSync( path );
+        if ( size ) {
+            return Math.round( size / ( 1024 * 1024 ) );
+        }
+    } catch ( e ) {
+        console.error( e );
+        return 0;
+    }
+};
+
 module.exports = {
 	download,
 	ensureExists,
 	fileExists,
+	getSizeInMb,
 	ls,
 	readFile,
 	readJSON,
