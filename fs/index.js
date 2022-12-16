@@ -28,7 +28,7 @@ const ls = async ( inputDir, opts = {} ) => {
  * Ensure a path exists on disk.
  *
  * @param {string} path An absolute file system path
- * @returns Promise
+ * @returns {Promise} Check if a directory exists and create it if not.
  */
 const ensureExists = ( path ) => new Promise( ( resolve, reject ) => {
 	mkdirp( path, ( err ) => {
@@ -43,9 +43,8 @@ const ensureExists = ( path ) => new Promise( ( resolve, reject ) => {
 /**
  * Ensure a file exists on disk.
  *
- * @param {string} path An absolute file system path
- * @param filePath
- * @returns Promise
+ * @param {string} filePath An absolute file system path
+ * @returns {Promise<bool>} Whether that path exists on disk
  */
 const fileExists = ( filePath ) => new Promise( ( resolve, reject ) => {
 	fs.stat( filePath, ( err ) => {
@@ -57,6 +56,7 @@ const fileExists = ( filePath ) => new Promise( ( resolve, reject ) => {
  * Read a file on disk and return its contents as a string.
  *
  * @param {string} filePath Absolute file system path for the file to read.
+ * @returns {Promise<string>} String contents of that file.
  */
 const readFile = ( filePath ) => {
 	return promisify( fs.readFile )( filePath ).then( ( contents ) => contents.toString() );
@@ -66,6 +66,7 @@ const readFile = ( filePath ) => {
  * Read a file on disk and parse its contents as JSON.
  *
  * @param {string} filePath Absolute file system path for the file to load.
+ * @returns {Promise} Contents of the JSON, parsed to a JS value.
  */
 const readJSON = ( filePath ) => readFile( filePath ).then( ( contents ) => {
 	return JSON.parse( contents );
@@ -76,6 +77,7 @@ const readJSON = ( filePath ) => readFile( filePath ).then( ( contents ) => {
  *
  * @param {string} filePath Absolute file system path for the file to write.
  * @param {string} contents Content to write to the file.
+ * @returns {Promise} Resolves when write finishes.
  */
 const writeFile = ( filePath, contents ) => {
 	return promisify( fs.writeFile )( filePath, contents );
@@ -86,6 +88,7 @@ const writeFile = ( filePath, contents ) => {
  *
  * @param {string} filePath Absolute file system path for the JSON file to write.
  * @param {string} contents Object to stringify as JSON and write to the file.
+ * @returns {Promise} Resolves when write finishes.
  */
 const writeJSON = ( filePath, contents ) => {
 	const jsonContents = JSON.stringify( contents );
@@ -97,7 +100,7 @@ const writeJSON = ( filePath, contents ) => {
  *
  * @param {string} filePath An absolute filesystem path to which to save the file.
  * @param {string} uri      A remote file URI.
- * @returns Promise
+ * @returns {Promise} Promise resolving when download completes.
  */
 const download = async ( filePath, uri ) => {
 	const outputDir = dirname( filePath );

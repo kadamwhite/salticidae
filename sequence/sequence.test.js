@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-returns */
 const {
 	runInSequence,
 	runInBatches,
@@ -34,8 +35,11 @@ describe( 'salticidae.sequence', () => {
 		it( 'runs provided async functions in sequence', () => {
 			const output = [];
 			/**
-			 * @param returnVal
-			 * @param delay
+			 * Make a Promise that resolves to a set value after a delay.
+			 *
+			 * @param {*}      returnVal Value to return.
+			 * @param {number} delay     How long before resolving.
+			 * @returns {Promise} The value, eventually.
 			 */
 			const resolveAfterDelay = ( returnVal, delay ) => new Promise( ( resolve ) => {
 				setTimeout( () => {
@@ -73,8 +77,11 @@ describe( 'salticidae.sequence', () => {
 		it( 'runs provided async functions in sequence', () => {
 			const output = [];
 			/**
-			 * @param returnVal
-			 * @param delay
+			 * Make a Promise that resolves to a set value after a delay.
+			 *
+			 * @param {*}      returnVal Value to return.
+			 * @param {number} delay     How long before resolving.
+			 * @returns {Promise} The value, eventually.
 			 */
 			const resolveAfterDelay = ( returnVal, delay ) => new Promise( ( resolve ) => {
 				setTimeout( () => {
