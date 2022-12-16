@@ -208,7 +208,7 @@ module.exports = {
 		} ],
 		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
-		'jsdoc/valid-types': 'warn',
+		'jsdoc/valid-types': 'off',
 		'array-callback-return': 'warn',
 		'default-case': [ 'warn', {
 			'commentPattern': '^no default$',

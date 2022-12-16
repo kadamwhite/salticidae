@@ -23,9 +23,9 @@ const exec = ( command ) => {
  * error object or code, depending on error state.
  *
  * @private
- * @param {cp.ChildProcess} spawnedProcess Invoked child process.
- * @param {Function}        resolve        Promise constructor resolve function.
- * @param {Function}        reject         Promise constructor reject function.
+ * @param {cp.ChildProcess}        spawnedProcess Invoked child process.
+ * @param {(value: any) => void}   resolve        Promise constructor resolve function.
+ * @param {(reason?: any) => void} reject         Promise constructor reject function.
  */
 const useInheritedStdIO = ( spawnedProcess, resolve, reject ) => {
 	spawnedProcess.on( 'error', ( err ) => reject( err ) );
@@ -44,32 +44,32 @@ const useInheritedStdIO = ( spawnedProcess, resolve, reject ) => {
  * the contents output to those respective streams.
  *
  * @private
- * @param {cp.ChildProcess} spawnedProcess Invoked child process.
- * @param {Function}        resolve        Promise constructor resolve function.
- * @param {Function}        reject         Promise constructor reject function.
+ * @param {cp.ChildProcess}        spawnedProcess Invoked child process.
+ * @param {(value: any) => void}   resolve        Promise constructor resolve function.
+ * @param {(reason?: any) => void} reject         Promise constructor reject function.
  */
 const usePipedStdIO = ( spawnedProcess, resolve, reject ) => {
-    const stdio = [];
+	const stdio = [];
 	spawnedProcess.stdout.on( 'data', ( chunk ) => {
 		stdio.push( chunk.toString() );
-    } );
+	} );
 
 	const stderr = [];
-    spawnedProcess.stderr.on( 'data', ( chunk ) => {
-        stderr.push( chunk.toString() );
-    } );
+	spawnedProcess.stderr.on( 'data', ( chunk ) => {
+		stderr.push( chunk.toString() );
+	} );
 
-    spawnedProcess.on( 'error', err => {
-        reject( err );
-    } );
+	spawnedProcess.on( 'error', ( err ) => {
+		reject( err );
+	} );
 
-    spawnedProcess.on( 'close', ( code, signal ) => {
-        if ( code ) {
-            reject( stderr.join( '\n' ) );
-            return;
-        }
-        resolve( stdio.join( '\n' ) );
-    } );
+	spawnedProcess.on( 'close', ( code, signal ) => {
+		if ( code ) {
+			reject( stderr.join( '\n' ) );
+			return;
+		}
+		resolve( stdio.join( '\n' ) );
+	} );
 };
 
 /**
@@ -77,8 +77,12 @@ const usePipedStdIO = ( spawnedProcess, resolve, reject ) => {
  *
  * @param {string}               command    A bash command string, excluding arguments.
  * @param {Array<string|number>} args       Array of argument strings for the provided command.
- * @param {object}               [options]  cp.spawn options object.
- * @param {Function}             [callback] Handler function to control processing and resolution.
+ * @param {cp.SpawnOptions}      [options]  cp.spawn options object.
+ * @param {(
+ *   spawnedProcess: cp.ChildProcess,
+ *   resolve: (value: any) => void,
+ *   reject: (reason?: any) => void
+ * ) => void} [callback] Handler function to control processing and resolution.
  *
  * @returns {Promise} Promise that resolves depending on actions within callback().
  */
@@ -108,7 +112,7 @@ const spawn = ( command, args, options = {}, callback = useInheritedStdIO ) => {
  * @param {Array<string|number>} args       Array of argument strings for the provided command.
  * @returns {Promise} Promise that resolves when the child process completes or errors.
  */
-spawn.withInheritedStdIO = ( command, args ) => ( command, args, {}, useInheritedStdIO );
+spawn.withInheritedStdIO = ( command, args ) => spawn( command, args, {}, useInheritedStdIO );
 
 /**
  * Execute a command as a spawned process with piped stdio. The promise will
@@ -120,7 +124,7 @@ spawn.withInheritedStdIO = ( command, args ) => ( command, args, {}, useInherite
  * @returns {Promise<string>} Promise that resolves to stdout when the child process completes,
  *                            or the contents of stderr if it errors.
  */
-spawn.withPipedStdIO = ( command, args ) => ( command, args, {
+spawn.withPipedStdIO = ( command, args ) => spawn( command, args, {
 	// Be a TTY but also permit capturing output.
 	stdio: [ 'inherit', 'pipe', 'pipe' ],
 }, usePipedStdIO );
