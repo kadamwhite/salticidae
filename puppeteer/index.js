@@ -1,3 +1,5 @@
+const fs = require( 'fs' );
+
 const puppeteer = require( 'puppeteer' );
 
 let browserInstance = null;
@@ -21,7 +23,7 @@ const getBrowser = async () => {
  * @async
  * @returns {Promise} Promise resolving once browser has closed.
  */
-const closeBrowser = getBrowser().then( browser => browser.close() );
+const closeBrowser = getBrowser().then( ( browser ) => browser.close() );
 
 /**
  * Open a new page within the browser.
@@ -29,7 +31,7 @@ const closeBrowser = getBrowser().then( browser => browser.close() );
  * @async
  * @returns {Promise<puppeteer.Page>} Promise to a Puppeteer page object.
  */
-const getNewPage = () => getBrowser().then( browser => browser.newPage() );
+const getNewPage = () => getBrowser().then( ( browser ) => browser.newPage() );
 
 /**
  * Navigate to a page with the browser.
@@ -47,11 +49,10 @@ const getPage = async ( url, page = null ) => {
 
 	const response = await page.goto( url, { waitUntil: 'networkidle0' } );
 
-	const arr = {
-		one: 1,
-		two: 2,
+	return {
+		page,
+		response,
 	};
-	return { page, response };
 };
 
 /**
@@ -77,7 +78,7 @@ const getPageAsBuffer = async ( url, page = null ) => {
  */
 const download = async ( uri, localPath ) => {
 	const buffer = await getPageAsBuffer( uri );
-    fs.createReadStream( localPath ).pipe( buffer );
+	fs.createReadStream( localPath ).pipe( buffer );
 };
 
 module.exports = {
@@ -87,4 +88,4 @@ module.exports = {
 	getPage,
 	getPageAsBuffer,
 	download,
-}
+};

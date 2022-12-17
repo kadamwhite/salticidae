@@ -1,9 +1,10 @@
 const fs = require( 'fs' );
 const http = require( 'http' );
 const https = require( 'https' );
-const FileType = require( 'file-type' );
-const { resolve, dirname } = require( 'path' );
+const { resolve, dirname, extname } = require( 'path' );
 const { promisify } = require( 'util' );
+
+const FileType = require( 'file-type' );
 const mkdirp = require( 'mkdirp' );
 
 const { spawn } = require( '../cp' );
@@ -136,6 +137,7 @@ const getSizeInMb = ( path ) => {
 			return Math.round( size / ( 1024 * 1024 ) );
 		}
 	} catch ( e ) {
+		// eslint-disable-next-line no-console
 		console.error( e );
 		return 0;
 	}
@@ -157,10 +159,10 @@ const correctFileType = async ( filePath ) => {
 			const newPath = filePath.replace( new RegExp( `${ currentExt }$` ), targetExt );
 			await spawn( 'mv', [ filePath, newPath ] );
 		}
-	} catch (e) {
+	} catch ( e ) {
 		// Should we log this?
 	}
-  }
+};
 
 module.exports = {
 	download,
